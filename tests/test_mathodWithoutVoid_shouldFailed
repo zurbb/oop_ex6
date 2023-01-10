@@ -1,0 +1,15 @@
+void foo(){
+ a= 2;
+ if(true){
+    int a =2;
+
+ }
+}
+
+void foo1(int a){
+}
+
+
+int final a;
+
+VaribleValidator ->> varible(type t, )
