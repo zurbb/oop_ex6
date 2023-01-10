@@ -18,7 +18,6 @@ public class MethodValidator {
     // }
 
     static int isValid(String methodString){
-        return 1;
 //        Method method = new Method(methodString);
 //        return method.isValid();
 //        // varible type:string name :A = 2
