@@ -10,6 +10,10 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
+//
+//0 – if the code is legal.
+//• 1 – if the code is illegal.
+//• 2 – in case of IO errors (see errors).
 public class Sjavac {
     private static final String emptyLinePattern = "^\\s*$";
     private static final String COMMENT_LINE_START_WITH_SPACES = "comment line start with spaces, but got: ";
@@ -23,15 +27,22 @@ public class Sjavac {
 //        TODO: maybe args 1 ? 
 //        int result = readFileAndValidate(args[0]);
 //        System.out.println(result);
-        readFileAndValidate("tests/testCommentAndEmptyLine_shouldPass");
+        tests();
+//        readFileAndValidate("tests/testCommentAndEmptyLine_shouldPass");
         }
 
     private static int readFileAndValidate(String fileNamePath) {
-        String fileAsString = FileTextToString(fileNamePath);//file to text
-        System.out.println(fileAsString);
+        String fileAsString = "";
+        try {
+            fileAsString = FileTextToString(fileNamePath);
+        }
+        catch (IOException e){
+            return 2;
+        }
+        //file to text
         int isMethodsAndVariablesStatmementsValid = readMethodsAndVariables(fileAsString);
         if(isMethodsAndVariablesStatmementsValid==0){
-            /// validate all
+            System.out.println("all valid");
         }
         else{
             return isMethodsAndVariablesStatmementsValid;
@@ -45,14 +56,14 @@ public class Sjavac {
 //      / checks only for methods. 
     }
 
-    private static String FileTextToString(String fileNamePath) {
+    private static String FileTextToString(String fileNamePath) throws IOException {
         StringBuilder text = new StringBuilder();
         FileReader file = null;
         try {
             file = new FileReader(fileNamePath);
         } catch (FileNotFoundException e) {
-            //todo: some breakpoint to prevent from continue and add informative massage
-            System.out.println("File Not Found");
+            System.err.println(FILE_NOT_FOUND);
+            throw  new IOException();
         }
         //todo: file.exists?
         if (file == null) {
@@ -67,14 +78,14 @@ public class Sjavac {
                 text.append("\n");
             }
         } catch (IOException e) {
-            //todo: some breakpoint to prevent from continue and add informative massage
-            System.out.println("Error reading file");
+            System.err.println(ERROR_READING_FILE);
+            throw  new IOException();
         } finally {
             try {
                 reader.close();
             } catch (IOException e) {
-                //todo: some breakpoint to prevent from continue and add informative massage
-                System.out.println("Error closing file");
+                System.err.println(ERROR_CLOSING_FILE);
+                throw  new IOException();
             }
         }
         return text.toString();
