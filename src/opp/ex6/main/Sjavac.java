@@ -70,3 +70,5 @@ public class Sjavac {
         // if there is { in the line ->> find the closing one and concatenate all the string together  and call the methodvalidator
     }
 }
+
+
