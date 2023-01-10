@@ -7,11 +7,18 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class Sjavac {
     private static final String emptyLinePattern = "^\\s*$";
+    private static final String COMMENT_LINE_START_WITH_SPACES = "comment line start with spaces, but got: ";
+    private static final String ERROR_READING_FILE = "Error reading file";
+    private static final String ERROR_CLOSING_FILE = "Error closing file";
+    private static final String FILE_OPEN_FAILED = "File open failed";
+    private static final String FILE_NOT_FOUND = "File Not Found";
     private static Pattern commentPattern = Pattern.compile("^//.*$");
+    private static Pattern illegalulCommentPattern = Pattern.compile("^[\\s]+//.*$");
     public static void main(String[] args) {
 //        TODO: maybe args 1 ? 
 //        int result = readFileAndValidate(args[0]);
@@ -48,11 +55,9 @@ public class Sjavac {
             System.out.println("File Not Found");
         }
         //todo: file.exists?
-        if (file != null) {
-            System.out.println("File opened successfully");
-            //todo: some breakpoint to prevent from continue and add informative massage
-        } else {
-            System.out.println("File open failed");
+        if (file == null) {
+            System.err.println(FILE_OPEN_FAILED);
+            throw  new IOException();
         }
         BufferedReader reader = new BufferedReader(file);
         String line;
@@ -76,20 +81,32 @@ public class Sjavac {
     }
 
     private static int readMethodsAndVariables(String fileText) {
-        return 1;
-        // read ass buffer
-        // if space line ->> skip
-        // if comments line ->> validate and skip
-        // if variable ->> call variableValidator
-        // if there is { in the line ->> find the closing one and concatenate all the string together  and call the methodvalidator
+
+        Scanner scanner = new Scanner(fileText);
+        String line;
+        while (scanner.hasNextLine()) {
+            line = scanner.nextLine();
+            // in case of legal comment or empty line
+            if(line.matches(emptyLinePattern) && commentPattern.matcher(line).find()){
+                continue;
+            }
+            else if (illegalulCommentPattern.matcher(line).find()){
+                System.err.println(COMMENT_LINE_START_WITH_SPACES + line);
+                return 1;
+            }
+        }
+        return 0;
     }
 
     private static void tests(){
         List<String> files = new ArrayList<String>();
-        files.add("testCommentAndEmptyLine_shouldPass");
-//        for(String file : files){
-//            System.out.println("file: " + file +readFileAndValidate(file).toString());
-//        }
+        files.add("tests/testCommentAndEmptyLine_shouldPass");
+        files.add("tests/testIllegalCommentShouldFail");
+
+        for(String file : files){
+            readFileAndValidate(file);
+            System.out.println("file: " + file+"\n" );
+        }
 
     }
 }
