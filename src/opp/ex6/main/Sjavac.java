@@ -1,6 +1,11 @@
 package opp.ex6.main;
 
 
+import opp.ex6.Validators.BaseException;
+import opp.ex6.Validators.Const;
+import opp.ex6.Validators.VariablesValidator;
+import opp.ex6.Validators.VerifierExceptions;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -21,6 +26,8 @@ public class Sjavac {
     private static final String ERROR_CLOSING_FILE = "Error closing file";
     private static final String FILE_OPEN_FAILED = "File open failed";
     private static final String FILE_NOT_FOUND = "File Not Found";
+
+
     private static Pattern commentPattern = Pattern.compile("^//.*$");
     private static Pattern illegalulCommentPattern = Pattern.compile("^[\\s]+//.*$");
     public static void main(String[] args) {
@@ -91,7 +98,7 @@ public class Sjavac {
         return text.toString();
     }
 
-    private static int readMethodsAndVariables(String fileText) {
+    private static  void readMethodsAndVariables(String fileText) throws BaseException {
 
         Scanner scanner = new Scanner(fileText);
         String line;
@@ -102,15 +109,20 @@ public class Sjavac {
                 continue;
             }
             else if (illegalulCommentPattern.matcher(line).find()){
-                System.err.println(COMMENT_LINE_START_WITH_SPACES + line);
-                return 1;
+                throw new VerifierExceptions.IllegalComment(line);
+//Const.isCanidateForVAribale.matcher(line).find()
+            } else if (true) {
+                VariablesValidator.validateGlobal(line);
             }
         }
         return 0;
     }
 
     private static void tests(){
+
+
         List<String> files = new ArrayList<String>();
+        files.add("tests/test_globalMethod_shouldPass");
         files.add("tests/testCommentAndEmptyLine_shouldPass");
         files.add("tests/testIllegalCommentShouldFail");
 

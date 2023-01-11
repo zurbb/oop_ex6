@@ -1,7 +1,5 @@
 package opp.ex6.Validators;
 
-import opp.ex6.Method;
-
 import java.util.HashMap;
 
 public class MethodValidator {
