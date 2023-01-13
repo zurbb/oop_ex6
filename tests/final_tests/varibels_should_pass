@@ -1,0 +1,30 @@
+// spaces
+
+String x = "5";
+String y = "5" ,y_ = "5";
+boolean x_ = 5, y__=true;
+char c___='c';
+String p_pp="";
+
+x="9";
+
+boolean bb;
+
+bb=true;
+
+int i = 5;
+i=6;
+/////// ////{{{
+
+// comments should work
+
+bb= 1;
+bb = false;
+int AA =i,BB=2;
+String z, b;
+z="xx";
+b ="123";
+
+double A_AA_x = 1,BBB=2.0, CCC=3.3333;
+//comments should work
+

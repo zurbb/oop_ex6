@@ -1,0 +1,22 @@
+//fail : 4,6,9,17,20,22
+int x = 4;
+//next line should fail
+x = "wrong input to integer";
+//next line should fail
+final int y = 'c';
+final int __xx__ = 5;
+//next line should fail - change value of final
+__xx__ = 6
+int a,b,c;
+a = 1;
+b=2;
+c= 55;
+int d = a;
+final String str = "";
+//next line should fail - g!=char
+int gg = y;
+final int __a = 5,__h = 5;
+//next line should fail - _ not valid name
+final int _ = 5,__h = 5;
+//next line should fail - _ name cannot be "....."
+int "wrong_name" 3;

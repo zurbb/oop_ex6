@@ -1,0 +1,1 @@
+    public final static Pattern METHOD_PATTERN_ARGUMENTS = Pattern.compile("([\\s]*(int|double|String|boolean|char)[\\s]+(__|_[a-zA-Z0-9]|[a-zA-Z])([_a-zA-Z0-9])*[\\s]*,)*");

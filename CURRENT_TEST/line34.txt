@@ -1,0 +1,1 @@
+    public final static Pattern CHAR_VALUE = Pattern.compile("^'[\\x20-\\x7E]'$");

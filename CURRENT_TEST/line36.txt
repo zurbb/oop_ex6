@@ -1,0 +1,1 @@
+    public static final Pattern VARIABLE_ONLY_ONE_ASSIGMENT = Pattern.compile("^[\\s]*(_[\\w]+|[a-zA-z][\\w]*)[\\s]*=[\\s]*([\\w]*|.)+[\\s]*;$");

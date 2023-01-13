@@ -1,10 +1,7 @@
 package opp.ex6.main;
 
 
-import opp.ex6.Validators.BaseException;
-import opp.ex6.Validators.Const;
-import opp.ex6.Validators.VariablesValidator;
-import opp.ex6.Validators.VerifierExceptions;
+import opp.ex6.Validators.*;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -28,8 +25,8 @@ public class Sjavac {
     private static final String FILE_NOT_FOUND = "File Not Found";
 
 
-    private static Pattern commentPattern = Pattern.compile("^//.*$");
-    private static Pattern illegalulCommentPattern = Pattern.compile("^[\\s]+//.*$");
+    public static Scanner scanner;
+
     public static void main(String[] args) {
 //        TODO: maybe args 1 ? 
 //        int result = readFileAndValidate(args[0]);
@@ -62,6 +59,18 @@ public class Sjavac {
 //        // for each buffer do:
 //      / checks only for methods. 
     }
+
+    private static void validateMethods(String fileText) {
+        List<String> allFileAsLineList = Utils.allFileAsLineList(fileText);
+
+        for(Method method: Method.getGlobalMethods().values()){
+            int start = method.getStartPosInd() ,end = method.getEndPosInd();
+            List<String> allLinesOfMethod = Utils.subLinesOfFunction(start,end,allFileAsLineList);
+            method.validate(allLinesOfMethod);
+        }
+
+    }
+
 
     private static String FileTextToString(String fileNamePath) throws IOException {
         StringBuilder text = new StringBuilder();
@@ -110,10 +119,16 @@ public class Sjavac {
             }
             else if (illegalulCommentPattern.matcher(line).find()){
                 throw new VerifierExceptions.IllegalComment(line);
-//Const.isCanidateForVAribale.matcher(line).find()
-            } else if (true) {
-                VariablesValidator.validateGlobal(line);
             }
+            else if (MethodUtils.validateMethodSignature(line)){
+                String name= MethodUtils.getMethodName(line);
+                List<Variable> params = MethodUtils.getMethodParams(line);
+                Map.Entry<Integer,Integer> startAndEnd = MethodUtils.forwardScanner(scanner,lineIndex);
+                lineIndex = startAndEnd.getValue();
+                Method.addMethod(startAndEnd.getKey(), startAndEnd.getValue(), name,params);
+                continue;
+            }
+            VariablesValidator.validateGlobal(line);
         }
         return 0;
     }
@@ -125,11 +140,30 @@ public class Sjavac {
         files.add("tests/test_globalMethod_shouldPass");
         files.add("tests/testCommentAndEmptyLine_shouldPass");
         files.add("tests/testIllegalCommentShouldFail");
+//        String path = "/cs/usr/itayyamin/Desktop/oop_ex6/finalGlobalStatShouldFail/line";
+        String path = "/cs/usr/itayyamin/Desktop/oop_ex6/CURRENT_TEST/line";
+        int count = 0;
 
-        for(String file : files){
-            readFileAndValidate(file);
-            System.out.println("file: " + file+"\n" );
+        /// only on test on all file
+//        int x = readFileAndValidate("tests/fucntion_tests/function_tests_brackets_should_pass");
+//        System.out.println("result: " + Integer.toString(x));
+        ///////////////////////////////////////
+
+        /// for multiple lines
+        for(int i=1;i<45;i++){
+            String file = path +Integer.toString(i)+".txt";
+
+            System.out.println("****************************************************");
+            System.out.println(file);
+            int x = readFileAndValidate(file);
+            count+=x;
+            System.out.println("result: " + Integer.toString(x) + " in line " + Integer.toString(i));
+            System.out.println("****************************************************");
+
         }
+        ///////////////////////////////////
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!");
+        System.out.println("number of failed: "+ Integer.toString(count));
 
     }
 }

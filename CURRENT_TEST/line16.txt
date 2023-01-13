@@ -1,0 +1,1 @@
+    public final static Pattern IF_WHILE_PATTERN = Pattern.compile("([\\s]*(if|while)[\\s]*\\(.*\\)\\{\\s*)");

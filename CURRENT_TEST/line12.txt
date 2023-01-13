@@ -1,0 +1,1 @@
+    public final static Pattern isCanidateForVAribale = Pattern.compile("^[\\s]*(final )*[\\s]*(int|double|String|boolean|char)+[^\\(\\)\\{\\}\\[\\]]+;$"); //          name      =    eerfweg        ;

@@ -1,0 +1,1 @@
+    public static final Pattern EMPTY_LINE_PATTERN = Pattern.compile("^\\s*$");
