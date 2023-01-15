@@ -24,6 +24,13 @@ public class Variable {
         this.isInitiated =false;
     }
 
+    public Variable(String type, String name, boolean isInitiated){
+        this.type =type;
+        this.name = name;
+        this.isFinal =false;
+        this.isInitiated = isInitiated;
+    }
+
     public boolean isFinal(){
         return this.isFinal;
     }
@@ -31,7 +38,9 @@ public class Variable {
         return this.type;
     }
 
-
+    public void initiate(){
+        this.isInitiated= true;
+    }
     public boolean isInitiated(){
         return this.isInitiated;
     }

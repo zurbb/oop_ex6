@@ -1,14 +1,9 @@
 package opp.ex6;
-public enum Types {
-    INT("int"), DOUBLE("double"), BOOLEAN("boolean"), CHAR("char"), STRING("string");
+public class Types {
+    public static final String INT ="int";
+    public static final String DOUBLE ="double";
+    public static final String BOOLEAN ="boolean";
+    public static final String CHAR ="char";
+    public static final String STRING ="String";
 
-    private final String type;
-
-    Types(String type) {
-        this.type = type;
-    }
-
-    public String getType() {
-        return type;
-    }
 }
