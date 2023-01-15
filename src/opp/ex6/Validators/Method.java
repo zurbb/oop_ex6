@@ -1,6 +1,7 @@
 package opp.ex6.Validators;
 
 import java.util.*;
+//
 
 public class Method {
      private static Map<String, Method> globalMethods= new HashMap<>();
