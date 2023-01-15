@@ -1,4 +1,4 @@
-package opp.ex6.Validators;
+package opp.ex6.validators;
 
 public class IfAndWhileValidator {
 }

@@ -1,4 +1,4 @@
-package opp.ex6.Validators;
+package opp.ex6.exception;
 
 public class VerifierExceptions {
     public static class FinalNotInitiated extends BaseException

@@ -1,7 +1,12 @@
 package opp.ex6.main;
 
 
-import opp.ex6.Validators.*;
+import opp.ex6.utils.MethodUtils;
+import opp.ex6.utils.RegexUtils;
+import opp.ex6.utils.Utils;
+import opp.ex6.exception.BaseException;
+import opp.ex6.exception.VerifierExceptions;
+import opp.ex6.validators.*;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -11,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
 //
 //0 – if the code is legal.
@@ -121,11 +125,11 @@ public class Sjavac {
             lineIndex+=1;
             line = scanner.nextLine();
             // in case of legal comment or empty line
-            if(Const.EMPTY_LINE_PATTERN.matcher(line).matches() ||Const.COMMENT_PATTERN.matcher(line).matches()){
+            if(RegexUtils.EMPTY_LINE_PATTERN.matcher(line).matches() || RegexUtils.COMMENT_PATTERN.matcher(line).matches()){
                 continue;
             }
             // must be comment but not valid
-            else if (Const.ILEGAL_COMMENT.matcher(line).matches()){
+            else if (RegexUtils.ILEGAL_COMMENT.matcher(line).matches()){
                 throw new VerifierExceptions.IllegalComment(line);
             }
             else if (MethodUtils.validateMethodSignature(line)){
@@ -136,7 +140,7 @@ public class Sjavac {
                 Method.addMethod(startAndEnd.getKey(), startAndEnd.getValue(), name,params);
                 continue;
             }
-            VariablesValidator.validateGlobal(line);
+            GlobalVariablesValidator.validateGlobal(line);
         }
 
     }

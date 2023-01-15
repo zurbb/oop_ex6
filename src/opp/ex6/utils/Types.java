@@ -1,4 +1,4 @@
-package opp.ex6;
+package opp.ex6.utils;
 public class Types {
     public static final String INT ="int";
     public static final String DOUBLE ="double";

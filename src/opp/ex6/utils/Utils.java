@@ -1,4 +1,4 @@
-package opp.ex6.main;
+package opp.ex6.utils;
 
 import java.util.Arrays;
 import java.util.List;

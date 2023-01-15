@@ -1,8 +1,8 @@
-package opp.ex6.Validators;
+package opp.ex6.utils;
 
 import java.util.regex.Pattern;
 
-public class Const {
+public class RegexUtils {
     public static final Pattern EMPTY_LINE_PATTERN = Pattern.compile("^\\s*$");
 
     public static final Pattern COMMENT_PATTERN = Pattern.compile("^//.*$");
@@ -13,7 +13,7 @@ public class Const {
     public final static Pattern NAME = Pattern.compile("^(__|_[a-zA-Z0-9]|[a-zA-Z])([_a-zA-Z0-9])*$");
 
 
-    public final static Pattern IF_WHILE_PATTERN = Pattern.compile("([\\s]*(if|while)[\\s]*\\(.*\\)\\{\\s*)");
+    public final static Pattern IF_WHILE_PATTERN = Pattern.compile("(^[\\s]*(if|while)[\\s]*\\(.*\\)\\{\\s*)$");
     public final static Pattern IF_WHILE_ARGUMENTS = Pattern.compile("^(\\s*(((-|\\+)?\\d+|true|(__|_[a-zA-Z0-9]|[a-zA-Z])(\\w)*|false|(-|\\+)?\\d*\\.\\d+|\\d+\\.\\d*)[\\s]*(&&|\\|\\|)))+$");
 
 
@@ -21,6 +21,8 @@ public class Const {
 
     public final static Pattern METHOD_PATTERN_SIGNATURE = Pattern.compile("^([\\s]*void[\\s]+([a-zA-Z]{1}[\\w]*)[\\s]*\\((.*)\\)[\\s]*\\{[\\s]*$)");
     public final static Pattern METHOD_PATTERN_ARGUMENTS = Pattern.compile("([\\s]*(int|double|String|boolean|char)[\\s]+(__|_[a-zA-Z0-9]|[a-zA-Z])([_a-zA-Z0-9])*[\\s]*,)*");
+    public final static Pattern METHOD_CALL_PATTERN_SIGNATURE = Pattern.compile("^[\\s]*([a-zA-Z]{1}[\\w]*)[\\s]*\\((.*)\\)[\\s]*;$");
+    public final static Pattern METHOD_CALL_PATTERN_ARGUMENTS = Pattern.compile("^[\\s]*([a-zA-Z]{1}[\\w]*)[\\s]*\\((.*)\\)[\\s]*;$");
 
     public static final Pattern START_WITH_TYPE =Pattern.compile("^(int |double |String |boolean |char )");
 

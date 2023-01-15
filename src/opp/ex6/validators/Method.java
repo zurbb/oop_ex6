@@ -1,4 +1,10 @@
-package opp.ex6.Validators;
+package opp.ex6.validators;
+
+import opp.ex6.exception.BaseException;
+import opp.ex6.exception.VerifierExceptions;
+import opp.ex6.utils.IfAndWhileUtils;
+import opp.ex6.utils.MethodUtils;
+import opp.ex6.utils.RegexUtils;
 
 import java.util.*;
 //
@@ -51,14 +57,5 @@ public class Method {
 
      }
 
-     public static Map<String, Method> getGlobalMethods(){
-          return globalMethods;
-     }
 
-     public static void addMethod(int startPosInLine, int endPosInLine, String methodName, List<Variable> params) {
-          new Method(startPosInLine,endPosInLine,methodName,params);
-     }
-
-     public void validate(List<String> lines){
-     }
 }
