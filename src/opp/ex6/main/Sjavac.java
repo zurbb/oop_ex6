@@ -53,7 +53,7 @@ public class Sjavac {
         //file to text
         try {
             readMethodsAndVariables(fileAsString);
-            validateMethods(fileAsString);
+            MethodValidator.validateMethods(fileAsString);
         }
         catch (BaseException e){
             //TODO:
@@ -69,16 +69,7 @@ public class Sjavac {
 //      / checks only for methods. 
     }
 
-    private static void validateMethods(String fileText) {
-        List<String> allFileAsLineList = Utils.allFileAsLineList(fileText);
 
-        for(Method method: Method.getGlobalMethods().values()){
-            int start = method.getStartPosInd() ,end = method.getEndPosInd();
-            List<String> allLinesOfMethod = Utils.subLinesOfFunction(start,end,allFileAsLineList);
-            method.validate(allLinesOfMethod);
-        }
-
-    }
 
 
     private static String FileTextToString(String fileNamePath) throws IOException {

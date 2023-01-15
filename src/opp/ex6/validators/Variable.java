@@ -1,6 +1,4 @@
-package opp.ex6.Validators;
-
-import opp.ex6.Types;
+package opp.ex6.validators;
 
 public class Variable {
     boolean isFinal;
