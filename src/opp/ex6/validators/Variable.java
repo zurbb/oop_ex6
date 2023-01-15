@@ -29,6 +29,10 @@ public class Variable {
         this.isInitiated = isInitiated;
     }
 
+    public String getName(){
+        return this.name;
+    }
+
     public boolean isFinal(){
         return this.isFinal;
     }

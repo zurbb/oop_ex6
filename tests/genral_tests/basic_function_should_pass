@@ -1,0 +1,16 @@
+int x = 4;
+
+String y = "f";
+
+//basic function should pass
+void foo(){
+return;
+}
+
+
+void foo1(int x, int y){
+
+
+
+return;
+}

@@ -122,7 +122,7 @@ public class Sjavac {
                 throw new VerifierExceptions.IllegalComment(line);
             }
             else if (MethodUtils.validateMethodSignature(line)){
-                String name= MethodUtils.getMethodName(line);
+                String name= MethodUtils.getMethodName(line,lineIndex);
                 List<Variable> params = MethodUtils.getMethodParams(line);
                 Map.Entry<Integer,Integer> startAndEnd = MethodUtils.forwardScanner(scanner,lineIndex);
                 lineIndex = startAndEnd.getValue();

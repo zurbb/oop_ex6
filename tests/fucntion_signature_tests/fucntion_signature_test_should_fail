@@ -1,5 +1,7 @@
 // 9 errors, line 10 pass
 void foo1(,){
+return;
+}
 void foo2(     )
 void foo3(String name     ){{
 void foo4(String nm int age     ){

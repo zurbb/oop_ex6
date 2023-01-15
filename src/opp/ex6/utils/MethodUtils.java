@@ -3,6 +3,7 @@ package opp.ex6.utils;
 import opp.ex6.exception.BaseException;
 import opp.ex6.exception.VerifierExceptions;
 import opp.ex6.validators.*;
+import org.w3c.dom.ls.LSOutput;
 
 import java.util.*;
 
@@ -14,14 +15,14 @@ public class MethodUtils {
         return RegexUtils.METHOD_PATTERN_SIGNATURE.matcher(methodLine).find();
     }
 
-    public static String getMethodName(String methodLine) throws  VerifierExceptions.alreadyDefined{
+    public static String getMethodName(String methodLine,int lineIndex) throws  VerifierExceptions.alreadyDefined{
         // first validate name and if false throw VerifierExceptions.IllegalName
         methodLine = methodLine.trim();
         int openBracketLine = methodLine.indexOf('(');
         String name=  methodLine.substring(0,openBracketLine).split("\\s")[1];
         //todo fix!!!
         if(MethodValidator.isNameAlreadyDefined(name)){
-            throw new VerifierExceptions.alreadyDefined(name);
+            throw new VerifierExceptions.alreadyDefined(name,lineIndex);
         }
         return name;
     }
@@ -50,6 +51,7 @@ public class MethodUtils {
                 throw new VerifierExceptions.MethodParamInvalid(methodArguments);
             }
             functionParamNames.add(name);
+
             parameters.add(new Variable(type,name,true));
         }
         return parameters;
@@ -62,7 +64,8 @@ public class MethodUtils {
 
     public static Map.Entry<String,List<String>> functionCallArgumentsValidation(String line){
         line = line.trim();
-        String name = line.split(" ")[0];
+        int openBracketIndex = line.indexOf('(');
+        String name = line.substring(0,openBracketIndex);
         List<String> arguments = new ArrayList<>();
         String argumentsBeforeSplit = findSubStringOfBrackets(line);
         if (argumentsBeforeSplit.equals("")){

@@ -20,7 +20,7 @@ public class RegexUtils {
     public final static Pattern VARIABLES_MUST_BE_WITH_EQUALS_SIGN = Pattern.compile("^([\\s]*[\\w]*[\\s]*=[\\s]*([\\\"']?[\\w]*[.]?[+|-]?[\\w]*)[\\\"']?[\\s]*,)*$");
 
     public final static Pattern METHOD_PATTERN_SIGNATURE = Pattern.compile("^([\\s]*void[\\s]+([a-zA-Z]{1}[\\w]*)[\\s]*\\((.*)\\)[\\s]*\\{[\\s]*$)");
-    public final static Pattern METHOD_PATTERN_ARGUMENTS = Pattern.compile("([\\s]*(int|double|String|boolean|char)[\\s]+(__|_[a-zA-Z0-9]|[a-zA-Z])([_a-zA-Z0-9])*[\\s]*,)*");
+    public final static Pattern METHOD_PATTERN_ARGUMENTS = Pattern.compile("^([\\s]*(int|double|String|boolean|char)[\\s]+(__|_[a-zA-Z0-9]|[a-zA-Z])([_a-zA-Z0-9])*[\\s]*,)*$");
     public final static Pattern METHOD_CALL_PATTERN_SIGNATURE = Pattern.compile("^[\\s]*([a-zA-Z]{1}[\\w]*)[\\s]*\\((.*)\\)[\\s]*;$");
 
     public static final Pattern START_WITH_TYPE =Pattern.compile("^(int |double |String |boolean |char )");
