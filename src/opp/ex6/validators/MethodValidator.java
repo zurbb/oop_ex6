@@ -7,7 +7,8 @@ import java.util.Map;
 import opp.ex6.exception.BaseException;
 import opp.ex6.utils.Utils;
 
-public class MethodValidator {
+public class
+MethodValidator {
 
     private static Map<String, Method> globalMethods= new HashMap<>();
 
@@ -31,6 +32,13 @@ public class MethodValidator {
             method.validate(allLinesOfMethod, scopeVariablesValidator);
         }
 
+    }
+
+    public static Method getMethodByName(String methodName){
+        if(globalMethods.containsKey(methodName)){
+            return globalMethods.get(methodName);
+        }
+        return null;
     }
 
 }

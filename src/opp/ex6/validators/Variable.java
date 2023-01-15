@@ -1,11 +1,11 @@
 package opp.ex6.validators;
 
 public class Variable {
-    boolean isFinal;
-    String type;
-    String name;
-    String value;
-    boolean isInitiated;
+    private boolean isFinal=false;
+    private String type;
+    private String name;
+    private String value;
+    private boolean isInitiated = false;
 
     public Variable(boolean isFinal, String type, String name, String value) {
         this.isFinal = isFinal;
@@ -38,6 +38,10 @@ public class Variable {
     }
     public String getType(){
         return this.type;
+    }
+
+    public String getValue(){
+        return this.value;
     }
 
     public void initiate(){

@@ -119,7 +119,7 @@ public class Sjavac {
             }
             // must be comment but not valid
             else if (RegexUtils.ILEGAL_COMMENT.matcher(line).matches()){
-                throw new VerifierExceptions.IllegalComment(line);
+                throw new VerifierExceptions.IllegalComment(line, lineIndex);
             }
             else if (MethodUtils.validateMethodSignature(line)){
                 String name= MethodUtils.getMethodName(line,lineIndex);
@@ -129,7 +129,7 @@ public class Sjavac {
                 Method.addMethod(startAndEnd.getKey(), startAndEnd.getValue(), name,params);
                 continue;
             }
-            GlobalVariablesValidator.validateGlobal(line);
+            scopeVariablesValidator.validate(line, lineIndex);
         }
 
     }

@@ -9,6 +9,14 @@ public class VerifierExceptions {
         }
     }
 
+    public static class IfAndWhileParamsError extends BaseException
+    {
+        //        private static final long serialVersionUID = 3555714415375055302L;
+        public IfAndWhileParamsError(String params, int lineIndex) {
+            super("at line: "+ lineIndex+ "condition with invalid params: " + params);
+        }
+    }
+
     public static class IllegalGlobalStatement extends BaseException
     {
         //        private static final long serialVersionUID = 3555714415375055302L;
@@ -20,16 +28,16 @@ public class VerifierExceptions {
     public static class IllegalComment extends BaseException
     {
         //        private static final long serialVersionUID = 3555714415375055302L;
-        public IllegalComment(String line) {
-            super("illegal comment: "+line);
+        public IllegalComment(String line, int lineIndex) {
+            super("at line: "+ lineIndex+" illegal comment: "+line);
         }
     }
 
     public static class ValueNotMatchToType extends BaseException
     {
         //        private static final long serialVersionUID = 3555714415375055302L;
-        public ValueNotMatchToType(String type, String value) {
-            super(type +" cannot be assigned to value: " + value);
+        public ValueNotMatchToType(String type, String value, int lineIndex) {
+            super("at line: "+ lineIndex+" : " +type +" cannot be assigned to value: " + value);
         }
     }
 

@@ -5,6 +5,7 @@ import opp.ex6.exception.VerifierExceptions;
 import opp.ex6.utils.IfAndWhileUtils;
 import opp.ex6.utils.MethodUtils;
 import opp.ex6.utils.RegexUtils;
+import opp.ex6.utils.Utils;
 
 import java.util.*;
 //
@@ -40,40 +41,47 @@ public class Method {
           return this.parameters;
      }
 
-     public static void validateValidCallForMethod(String nameOfMethod, List<Variable> parameters) throws  VerifierExceptions.InvalidMethodCall{
-          if(MethodValidator.getGlobalMethods().containsKey(nameOfMethod)){
-               Method method = MethodValidator.getGlobalMethods().get(nameOfMethod);
-               List<Variable> methodParams = method.getParameters();
-               if(parameters.size() == methodParams.size()){
-                    for(int i =0; i<parameters.size();i++){
-                         if(!parameters.get(i).getType().equals(methodParams.get(i).getType())){
-                              throw new VerifierExceptions.InvalidMethodCall(nameOfMethod);
-                         }
-                    }
-                    return;
-               }
-          }
-          throw new VerifierExceptions.InvalidMethodCall(nameOfMethod);
+     public void validateValidCallForMethod(List<String> parametersValues, int lineIndex) throws  VerifierExceptions.InvalidMethodCall{
+
+        if(getParameters().size()==parametersValues.size()){
+             for(int i=0; i< getParameters().size();i++){
+                  if(!Utils.isTypesMatchValue(getParameters().get(i).getType(),parametersValues.get(i))){
+                      throw new VerifierExceptions.InvalidMethodCall(parametersValues.toString(),lineIndex);
+                  }
+             }
+             return;
+        }
+        throw new VerifierExceptions.InvalidMethodCall(parametersValues.toString(),lineIndex);
+
 
      }
 
-     public void validate(List<String> lines) throws BaseException {
+     public void validate(List<String> lines, ScopeVariablesValidator scopeVariablesValidator) throws BaseException {
+         scopeVariablesValidator.openScope();
+         scopeVariablesValidator.addFunctionParams(parameters);
+          int lineIndex = getStartPosInd()-1;
           for(String line: lines){
+
+              lineIndex+=1;
                line = line.trim();
                if(RegexUtils.EMPTY_LINE_PATTERN.matcher(line).matches()|| RegexUtils.COMMENT_PATTERN.matcher(line).matches()){
                     continue;
                }
                if(RegexUtils.ILEGAL_COMMENT.matcher(line).matches()){
-                    throw new VerifierExceptions.IllegalComment(line);
+                    throw new VerifierExceptions.IllegalComment(line, lineIndex);
                }
                if(line.trim().equals("}")){
                     scopeVariablesValidator.removeScope();
                     continue;
                }
-               //TODO:yamin
-               if(RegexUtils.IF_WHILE_PATTERN.matcher(line).matches()){
-                    List<String> ifAndWhileParameters = IfAndWhileUtils.ifWhileArgumentsValidation(line);
-
+               if(line.trim().equals("return;")){
+                   continue;
+              }
+             if(RegexUtils.IF_WHILE_PATTERN.matcher(line).matches()){
+                    scopeVariablesValidator.openScope();
+                    List<String> ifAndWhileParameters = IfAndWhileUtils.ifWhileArgumentsValidation(line,lineIndex);
+                    scopeVariablesValidator.validateIfAndWhileVariablesTypes(ifAndWhileParameters, lineIndex);
+                    continue;
                }
                if(RegexUtils.METHOD_CALL_PATTERN_SIGNATURE.matcher(line).matches()){
                     Map.Entry<String,List<String>> functionNameAndParam = MethodUtils.functionCallArgumentsValidation(line);
@@ -81,6 +89,12 @@ public class Method {
                     scopeVariablesValidator.validateMethodCallWithValidParams(functionNameAndParam, lineIndex);
                     continue;
                }
+              scopeVariablesValidator.validate(line, lineIndex);
+              if(lineIndex==9){
+                   System.out.println(line);
+               }
+
+
 
           }
      }
