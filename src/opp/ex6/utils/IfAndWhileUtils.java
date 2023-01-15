@@ -1,16 +1,19 @@
 package opp.ex6.utils;
 
+import opp.ex6.exception.VerifierExceptions;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import static opp.ex6.utils.MethodUtils.findSubString;
+import static opp.ex6.utils.Utils.findSubStringOfBrackets;
+
 
 public class IfAndWhileUtils {
 
 
-    public static List<String> ifWhileArgumentsValidation(String line){
+    public static List<String> ifWhileArgumentsValidation(String line, int lineIndex) throws VerifierExceptions.InvalidIfWhileArguments {
         List<String> arguments = new ArrayList<>();
-        String argumentsBeforeSplit = findSubString(line);
+        String argumentsBeforeSplit = findSubStringOfBrackets(line);
         if (argumentsBeforeSplit.equals("")){
             return arguments;
         }
@@ -22,11 +25,13 @@ public class IfAndWhileUtils {
                 }
             }
             else{
-                //todo: change execption
-                throw new RuntimeException();
+                //todo: change execption to add line number?
+                throw new VerifierExceptions.InvalidIfWhileArguments(line, lineIndex);
             }
         }
         return arguments;
     }
+
+
 
 }

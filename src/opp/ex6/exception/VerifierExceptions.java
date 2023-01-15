@@ -119,5 +119,10 @@ public class VerifierExceptions {
             super("Missing return statement at: "+line);
         }
     }
+    public static class InvalidIfWhileArguments extends BaseException{
+        public InvalidIfWhileArguments(String line, int lineIndex){
+            super("Invalid param : "+line+ " if/while arguments pattern in line: "+lineIndex);
+        }
+    }
 
 }

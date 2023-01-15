@@ -6,6 +6,8 @@ import opp.ex6.validators.*;
 
 import java.util.*;
 
+import static opp.ex6.utils.Utils.findSubStringOfBrackets;
+
 public class MethodUtils {
 
     public static boolean validateMethodSignature(String methodLine){
@@ -18,20 +20,16 @@ public class MethodUtils {
         int openBracketLine = methodLine.indexOf('(');
         String name=  methodLine.substring(0,openBracketLine).split("\\s")[1];
         //todo fix!!!
-//        if(Method.isNameAlreadyDefined(name)){
-//            throw new VerifierExceptions.alreadyDefined(name);
-//        }
+        if(MethodValidator.isNameAlreadyDefined(name)){
+            throw new VerifierExceptions.alreadyDefined(name);
+        }
         return name;
     }
 
-    static String findSubString(String fullLine){
-        int openBracketLine = fullLine.indexOf('(');
-        int closeBracketLine = fullLine.indexOf(')');
-        return fullLine.substring(openBracketLine + 1, closeBracketLine);
-    }
+
     public static List<Variable> getMethodParams(String methodLine) throws  VerifierExceptions.MethodParamInvalid{
         List<Variable> parameters = new ArrayList<>();
-        String methodArguments = findSubString(methodLine);
+        String methodArguments = findSubStringOfBrackets(methodLine);
         if(methodArguments.trim().isEmpty()){
             return parameters;
         }
@@ -58,12 +56,13 @@ public class MethodUtils {
 
 
 
-    public static List<String> functionCallArgumentsValidation(String line){
-
+    public static Map.Entry<String,List<String>> functionCallArgumentsValidation(String line){
+        line = line.trim();
+        String name = line.split(" ")[0];
         List<String> arguments = new ArrayList<>();
-        String argumentsBeforeSplit = findSubString(line);
+        String argumentsBeforeSplit = findSubStringOfBrackets(line);
         if (argumentsBeforeSplit.equals("")){
-            return arguments;
+            return Map.entry(name,arguments);
         }
         else{
             for (String value : argumentsBeforeSplit.split(",")) {
@@ -73,7 +72,7 @@ public class MethodUtils {
                 checkValidArgumentPattern(argument);
             }
         }
-        return arguments;
+        return Map.entry(name,arguments);
     }
     //foo(x)
 
@@ -93,7 +92,7 @@ public class MethodUtils {
         if (RegexUtils.CHAR_VALUE.matcher(argument).matches()){
             return;
         }
-        if (RegexUtils.NAME.matcher(argument).matches()){
+        if (RegexUtils.VARIABLES_NAME.matcher(argument).matches()){
             return;
         }
         //todo: change exception
@@ -101,7 +100,6 @@ public class MethodUtils {
     }
 
     public static Map.Entry<Integer,Integer> forwardScanner(Scanner scanner, int start) throws BaseException {
-        System.out.println("------------------------------------");
         int brackets = 1;
         int endLine = start;
         String line="";
@@ -113,7 +111,7 @@ public class MethodUtils {
 
             //String x = {
 //                if (Const.IF_WHILE_PATTERN.matcher(line).matches()){
-//                    String arguments = (findSubString(line)+"||").trim();
+//                    String arguments = (findSubStringOfBrackets(line)+"||").trim();
 //                    if (Const.IF_WHILE_ARGUMENTS.matcher(arguments).matches()){
 //                        brackets++;
 //                    }

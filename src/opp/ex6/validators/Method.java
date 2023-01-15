@@ -64,8 +64,9 @@ public class Method {
                if(RegexUtils.ILEGAL_COMMENT.matcher(line).matches()){
                     throw new VerifierExceptions.IllegalComment(line);
                }
-               if(true){
-                    int x = 34;
+               if(line.trim().equals("}")){
+                    scopeVariablesValidator.removeScope();
+                    continue;
                }
                //TODO:yamin
                if(RegexUtils.IF_WHILE_PATTERN.matcher(line).matches()){
@@ -73,9 +74,9 @@ public class Method {
 
                }
                if(RegexUtils.METHOD_CALL_PATTERN_SIGNATURE.matcher(line).matches()){
-                    //todo change
-                    int t = 1;
-//                    Map.entry<String,List<String>> functionNameAndParam = MethodUtils.functionCallArgumentsValidation(line);
+                    Map.Entry<String,List<String>> functionNameAndParam = MethodUtils.functionCallArgumentsValidation(line);
+                    scopeVariablesValidator.validateMethodCallWithValidParams(functionNameAndParam);
+                    continue;
                }
 
           }

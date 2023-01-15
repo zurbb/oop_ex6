@@ -148,23 +148,23 @@ public class Sjavac {
         String path = "/cs/usr/itayyamin/Desktop/oop_ex6/CURRENT_TEST/line";
         int count = 0;
 
-        /// only on test on all file
-//        int x = readFileAndValidate("tests/fucntion_tests/function_tests_brackets_should_pass");
-//        System.out.println("result: " + Integer.toString(x));
-        ///////////////////////////////////////
+//        / only on test on all file
+        int x = readFileAndValidate("/cs/usr/itayyamin/Desktop/oop_ex6/tests/genral_tests/genral_test_1_should_pass");
+        System.out.println("result: " + Integer.toString(x));
+        /////////////////////////////////////
 
         /// for multiple lines
-        for(int i=1;i<12;i++){
-            String file = path +Integer.toString(i)+".txt";
-
-            System.out.println("****************************************************");
-            System.out.println(file);
-            int x = readFileAndValidate(file);
-            count+=x;
-            System.out.println("result: " + Integer.toString(x) + " in line " + Integer.toString(i));
-            System.out.println("****************************************************");
-
-        }
+//        for(int i=1;i<12;i++){
+//            String file = path +Integer.toString(i)+".txt";
+//
+//            System.out.println("****************************************************");
+//            System.out.println(file);
+//            int x = readFileAndValidate(file);
+//            count+=x;
+//            System.out.println("result: " + Integer.toString(x) + " in line " + Integer.toString(i));
+//            System.out.println("****************************************************");
+//
+//        }
         ///////////////////////////////////
         System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!");
         System.out.println("number of failed: "+ Integer.toString(count));

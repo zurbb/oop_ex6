@@ -7,7 +7,7 @@ public class Variable {
     String value;
     boolean isInitiated;
 
-    Variable(boolean isFinal, String type, String name, String value) {
+    public Variable(boolean isFinal, String type, String name, String value) {
         this.isFinal = isFinal;
         this.type = type;
         this.name = name;

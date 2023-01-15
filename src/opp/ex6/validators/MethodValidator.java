@@ -24,9 +24,6 @@ public class MethodValidator {
     }
 
 
-
-
-
     public static void validateMethods(String fileText) throws BaseException{
         List<String> allFileAsLineList = Utils.allFileAsLineList(fileText);
 

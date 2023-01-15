@@ -91,7 +91,7 @@ public class GlobalVariablesValidator {
         verifyAlreadyDefined(name);
         verifyName(name);
         Variable variable = globalVariables.get(name);
-        if(variable.isFinal){
+        if(variable.isFinal()){
             throw new VerifierExceptions.CannotModifieFinal(name +"=" + value);
         }
         verifyTypeMatchValue(variable.getType(),value);
@@ -135,7 +135,7 @@ public class GlobalVariablesValidator {
         }
     }
     private static void verifyName(String name) throws VerifierExceptions.IllegalName{
-        if(!RegexUtils.NAME.matcher(name).find() && !IllegalNames.contains(name)){
+        if(!RegexUtils.VARIABLES_NAME.matcher(name).find() && !IllegalNames.contains(name)){
             if(name.length()==0){
                 name = "<empty>";
             }
