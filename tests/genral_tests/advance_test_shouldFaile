@@ -1,0 +1,15 @@
+void foo1(int x, String g, boolean     p){
+
+if(true||  p){
+    if(true||false){
+        while(p&& false){
+            int t = 4;
+            String p = "hello";
+        }
+        //should fail because of mismatch type
+        String t = p;
+    }
+
+}
+return;
+}

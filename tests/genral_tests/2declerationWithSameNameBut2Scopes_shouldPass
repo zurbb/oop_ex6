@@ -1,0 +1,6 @@
+boolean s = 5;
+
+void foo(int x){
+String x= "ddd";
+return;
+}

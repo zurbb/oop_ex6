@@ -27,7 +27,9 @@ public class MethodUtils {
     }
 
 
-    public static List<Variable> getMethodParams(String methodLine) throws  VerifierExceptions.MethodParamInvalid{
+    public static List<Variable>
+    getMethodParams(String methodLine) throws  VerifierExceptions.MethodParamInvalid{
+
         List<Variable> parameters = new ArrayList<>();
         String methodArguments = findSubStringOfBrackets(methodLine);
         if(methodArguments.trim().isEmpty()){
@@ -40,8 +42,10 @@ public class MethodUtils {
 
         String[] vars = methodArguments.split(",");
         for(String typeAndName : vars){
-            String[] typeAndNameSplit = typeAndName.split("\\s");
+            typeAndName = typeAndName.trim();
+            String[] typeAndNameSplit = typeAndName.split("\\s+");
             String type = typeAndNameSplit[0].trim(), name = typeAndNameSplit[1].trim();
+
             if (functionParamNames.contains(name)){
                 throw new VerifierExceptions.MethodParamInvalid(methodArguments);
             }

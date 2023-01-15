@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import opp.ex6.exception.BaseException;
-import opp.ex6.exception.VerifierExceptions;
-import opp.ex6.utils.RegexUtils;
 import opp.ex6.utils.Utils;
 
 public class MethodValidator {
@@ -24,13 +22,13 @@ public class MethodValidator {
     }
 
 
-    public static void validateMethods(String fileText) throws BaseException{
+    public static void validateMethods(String fileText, ScopeVariablesValidator scopeVariablesValidator) throws BaseException{
         List<String> allFileAsLineList = Utils.allFileAsLineList(fileText);
 
         for(Method method: getGlobalMethods().values()){
             int start = method.getStartPosInd() ,end = method.getEndPosInd();
             List<String> allLinesOfMethod = Utils.subLinesOfFunction(start,end,allFileAsLineList);
-            method.validate(allLinesOfMethod);
+            method.validate(allLinesOfMethod, scopeVariablesValidator);
         }
 
     }

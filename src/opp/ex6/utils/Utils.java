@@ -21,12 +21,13 @@ public class Utils {
         return fullLine.substring(openBracketLine + 1, closeBracketLine);
     }
 
-    public static boolean is2TypesMatch(String value, String otherValue){
-        if(RegexUtils.BOOLEAN_VALUE.matcher(value).matches()&&RegexUtils.BOOLEAN_VALUE.matcher(otherValue).matches()||
-                RegexUtils.INT_VALUE.matcher(value).matches()&&RegexUtils.INT_VALUE.matcher(otherValue).matches()||
-                RegexUtils.CHAR_VALUE.matcher(value).matches()&&RegexUtils.CHAR_VALUE.matcher(otherValue).matches()||
-                RegexUtils.DOUBLE_VALUE.matcher(value).matches()&&RegexUtils.DOUBLE_VALUE.matcher(otherValue).matches()||
-                RegexUtils.STRING_VALUE.matcher(value).matches()&&RegexUtils.STRING_VALUE.matcher(otherValue).matches()){
+    public static boolean isTypesMatchValue(String type, String value){
+        if(type.equals(Types.BOOLEAN)&&RegexUtils.BOOLEAN_VALUE.matcher(value).matches()||
+
+                type.equals(Types.INT)&&RegexUtils.INT_VALUE.matcher(value).matches()||
+                type.equals(Types.CHAR)&&RegexUtils.CHAR_VALUE.matcher(value).matches()||
+                type.equals(Types.DOUBLE)&&RegexUtils.DOUBLE_VALUE.matcher(value).matches()||
+                type.equals(Types.STRING)&&RegexUtils.STRING_VALUE.matcher(value).matches()){
             return true;
         }
         return false;

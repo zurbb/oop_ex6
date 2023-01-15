@@ -1,0 +1,8 @@
+void foo1(){
+
+if(true  ){
+int x;
+}
+
+return;
+}

@@ -14,11 +14,13 @@ public class Method {
 
      private final int startPosInd ;
      private final int endPosInd ;
+     private final String name;
 
      public Method(int startPosInd,int endPosInd,String methodName, List<Variable> params){
           this.startPosInd= startPosInd;
           this.endPosInd = endPosInd;
           this.parameters = params;
+          this.name = methodName;
      }
 
      public static void addMethod(int startPosInLine, int endPosInLine, String methodName, List<Variable> params) {
@@ -75,7 +77,8 @@ public class Method {
                }
                if(RegexUtils.METHOD_CALL_PATTERN_SIGNATURE.matcher(line).matches()){
                     Map.Entry<String,List<String>> functionNameAndParam = MethodUtils.functionCallArgumentsValidation(line);
-                    scopeVariablesValidator.validateMethodCallWithValidParams(functionNameAndParam);
+
+                    scopeVariablesValidator.validateMethodCallWithValidParams(functionNameAndParam, lineIndex);
                     continue;
                }
 

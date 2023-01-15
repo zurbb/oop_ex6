@@ -29,9 +29,7 @@ public class Sjavac {
     private static final String FILE_OPEN_FAILED = "File open failed";
     private static final String FILE_NOT_FOUND = "File Not Found";
 
-
-
-
+    private final  static ScopeVariablesValidator scopeVariablesValidator = new ScopeVariablesValidator();
     public static Scanner scanner;
 
     public static void main(String[] args) {
@@ -53,7 +51,7 @@ public class Sjavac {
         //file to text
         try {
             readMethodsAndVariables(fileAsString);
-            MethodValidator.validateMethods(fileAsString);
+            MethodValidator.validateMethods(fileAsString, scopeVariablesValidator);
         }
         catch (BaseException e){
             //TODO:
@@ -141,17 +139,32 @@ public class Sjavac {
 
 
         List<String> files = new ArrayList<String>();
-        files.add("tests/test_globalMethod_shouldPass");
-        files.add("tests/testCommentAndEmptyLine_shouldPass");
-        files.add("tests/testIllegalCommentShouldFail");
-//        String path = "/cs/usr/itayyamin/Desktop/oop_ex6/finalGlobalStatShouldFail/line";
-        String path = "/cs/usr/itayyamin/Desktop/oop_ex6/CURRENT_TEST/line";
-        int count = 0;
+        files.add("tests/genral_tests/basic_fucntion_use_function_params_pass");//0
+        files.add("tests/genral_tests/basic_function_should_pass");//1
+        files.add("tests/genral_tests/basic_functionWithInnerScopeStatement_should_pass");//2
+        files.add("tests/genral_tests/basicFunction_withWrongParam_shouldFail");//3
+        files.add("tests/genral_tests/functionWithCallForOnther_shouldPass");//4
+        files.add("/cs/usr/itayyamin/Desktop/oop_ex6/tests/genral_tests/basic_if_while_outside_func_fail");//5
+        files.add("/cs/usr/itayyamin/Desktop/oop_ex6/tests/genral_tests/baisc_if_while_test_pass");//6
+        files.add("tests/genral_tests/cahngingFinalInnerScope_shouldFail");//7
+        files.add("tests/genral_tests/advance_test_shouldFaile");//8
+        files.add("tests/genral_tests/advance_test_should_fail");//9
 
-//        / only on test on all file
-        int x = readFileAndValidate("/cs/usr/itayyamin/Desktop/oop_ex6/tests/genral_tests/genral_test_1_should_pass");
+
+
+
+
+        int i = 9;
+
+////        / only on test on all file
+
+        System.out.println("***********************************************");
+        int x = readFileAndValidate(files.get(i));
+        System.out.println(files.get(i));
         System.out.println("result: " + Integer.toString(x));
-        /////////////////////////////////////
+        System.out.println("***********************************************");
+
+//        /////////////////////////////////////
 
         /// for multiple lines
 //        for(int i=1;i<12;i++){
@@ -166,8 +179,7 @@ public class Sjavac {
 //
 //        }
         ///////////////////////////////////
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!");
-        System.out.println("number of failed: "+ Integer.toString(count));
+
 
     }
 }

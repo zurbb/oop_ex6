@@ -1,0 +1,11 @@
+int x = 1, z=x;
+void foo(){
+x=9;
+foo1(x,a_);
+return;
+}
+
+final String a_ ="fdfd";
+void foo1(int x, String z){
+return;
+}

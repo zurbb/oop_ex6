@@ -5,15 +5,15 @@
 //
 //import java.util.ArrayList;
 //import java.util.List;
+//import java.util.Map;
 //import java.util.regex.Matcher;
 //
 //public class VariablesUtils {
 //
 //
-//public List<Variable> getVariablesFromLine(String varLine,  int lineIndex){
-//    List<Variable> variableList = new ArrayList<>();
+//public List<Map.Entry<String,Variable>> getVariablesFromLine(String varLine, int lineIndex){
+//    List<Map.Entry<String,Variable>>  variableList = new ArrayList<>();
 //    varLine = varLine.trim();
-//
 //    boolean flagFinal = false;
 //    if(varLine.startsWith("final ")){
 //        flagFinal = true;
@@ -37,7 +37,7 @@
 //                String[] split =  nameAndValue.split("=");
 //                String name = split[0].trim(), value = split[1].trim();
 //
-//                variableList.add(new Variable(true,type,name, value););
+//                variableList.add(Map.entry(name,new Variable(true,type,name, value)));
 //            }
 //        }
 //    }
@@ -45,6 +45,7 @@
 //        if(RegexUtils.VARIABLES.matcher(varLine).find()){
 //            String[] namesAndValues  = varLine.split(",");
 //            for(String nameAndValue : namesAndValues){
+//
 //                if(nameAndValue.contains("=")){
 //                    String[] split =  nameAndValue.split("=");
 //                    String name = split[0].trim(), value = split[1].trim();
@@ -52,7 +53,7 @@
 //
 //                }
 //                else{
-//                    variableList.add(new Variable(type,nameAndValue.trim(),false));
+//                    variableList.add(Map.entry(nameAndValue.trim(),new Variable(type,nameAndValue.trim(),false)));
 //                }
 //            }
 //
@@ -61,8 +62,7 @@
 //            varLine = varLine.replaceFirst(";","").trim();
 //            String[] split =  varLine.split("=");
 //            String name = split[0].trim(), value = split[1].trim();
-//            addGlobalWithoutTypeAndValidate(name,value,lineIndex);
-//            return;
+//            variableList.add(Map.entry(name,new Variable(name,value));
 //        }
 //    }
 //

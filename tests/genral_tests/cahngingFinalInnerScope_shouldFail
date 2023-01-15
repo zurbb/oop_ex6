@@ -1,0 +1,9 @@
+final int x =5;
+void foo(){
+if(true){
+while(true){
+x=7;
+}
+}
+return;
+}
