@@ -1,1 +1,1 @@
-    public final static Pattern STRUCTURE_PATTERN_FOR_COMPLETE_STATEMENT = Pattern.compile("([\\s]*[\\s]*)([a-zA-Z]+)([\\s]+[a-zA-Z]+)([\\s]*=[\\s]*[a-zA-Z]+[\\s]*)*([\\s]*;$)");//     final    string   name   =    eerfweg        ;
+void t1(int x){

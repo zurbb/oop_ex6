@@ -1,0 +1,1 @@
+void foo6(String name, int age   ,boolean t       {

@@ -1,1 +1,0 @@
-    public final static Pattern STRING_VALUE = Pattern.compile("^(\"[\\x20-\\x7E]*\")$");

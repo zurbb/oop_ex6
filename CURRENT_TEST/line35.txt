@@ -1,1 +1,0 @@
-    public static final Pattern VARIABLES = Pattern.compile("^(([\\s]*[\\w]+[\\s]*|[\\s]*[\\w]+[\\s]*=[\\s]*[\\w]+[\\s]*),)*");

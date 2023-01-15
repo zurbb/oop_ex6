@@ -1,0 +1,7 @@
+void foo1(){
+void foo2(     ){
+void foo3(String name     ){
+void foo4(String name, int age     ){
+void foo5(String name, int age     )     {
+void foo6(String name, int age   ,boolean t  )     {
+void foo6(String name, int age   ,boolean t )     {

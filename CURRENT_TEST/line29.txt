@@ -1,1 +1,0 @@
-    public final static Pattern TYPE = Pattern.compile("[\\s]*(int|double|String|boolean|char)");

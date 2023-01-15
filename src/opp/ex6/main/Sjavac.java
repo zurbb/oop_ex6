@@ -9,6 +9,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -17,12 +18,14 @@ import java.util.regex.Pattern;
 //• 1 – if the code is illegal.
 //• 2 – in case of IO errors (see errors).
 public class Sjavac {
-    private static final String emptyLinePattern = "^\\s*$";
+
     private static final String COMMENT_LINE_START_WITH_SPACES = "comment line start with spaces, but got: ";
     private static final String ERROR_READING_FILE = "Error reading file";
     private static final String ERROR_CLOSING_FILE = "Error closing file";
     private static final String FILE_OPEN_FAILED = "File open failed";
     private static final String FILE_NOT_FOUND = "File Not Found";
+
+
 
 
     public static Scanner scanner;
@@ -44,14 +47,16 @@ public class Sjavac {
             return 2;
         }
         //file to text
-        int isMethodsAndVariablesStatmementsValid = readMethodsAndVariables(fileAsString);
-        if(isMethodsAndVariablesStatmementsValid==0){
-            System.out.println("all valid");
+        try {
+            readMethodsAndVariables(fileAsString);
+            validateMethods(fileAsString);
         }
-        else{
-            return isMethodsAndVariablesStatmementsValid;
+        catch (BaseException e){
+            //TODO:
+            System.out.println(e.getMessage());
+            return 1;
         }
-        return 1;
+        return 0;
 //        int isMethodsAndVariablesValid = readMethodsAndVariables(file);
         // read all the file and only scan for variables and methods.
 //        if(isMethodsAndVariablesValid==0)
@@ -107,17 +112,20 @@ public class Sjavac {
         return text.toString();
     }
 
+    // only read the method and variables and save the content. in case of invalid method or
     private static  void readMethodsAndVariables(String fileText) throws BaseException {
-
-        Scanner scanner = new Scanner(fileText);
+        scanner = new Scanner(fileText);
         String line;
+        int lineIndex = 0;
         while (scanner.hasNextLine()) {
+            lineIndex+=1;
             line = scanner.nextLine();
             // in case of legal comment or empty line
-            if(line.matches(emptyLinePattern) && commentPattern.matcher(line).find()){
+            if(Const.EMPTY_LINE_PATTERN.matcher(line).matches() ||Const.COMMENT_PATTERN.matcher(line).matches()){
                 continue;
             }
-            else if (illegalulCommentPattern.matcher(line).find()){
+            // must be comment but not valid
+            else if (Const.ILEGAL_COMMENT.matcher(line).matches()){
                 throw new VerifierExceptions.IllegalComment(line);
             }
             else if (MethodUtils.validateMethodSignature(line)){
@@ -130,8 +138,9 @@ public class Sjavac {
             }
             VariablesValidator.validateGlobal(line);
         }
-        return 0;
+
     }
+
 
     private static void tests(){
 
@@ -150,7 +159,7 @@ public class Sjavac {
         ///////////////////////////////////////
 
         /// for multiple lines
-        for(int i=1;i<45;i++){
+        for(int i=1;i<12;i++){
             String file = path +Integer.toString(i)+".txt";
 
             System.out.println("****************************************************");

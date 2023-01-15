@@ -1,1 +1,1 @@
-public class Const {
+void foo4(String nm int age     ){

@@ -1,1 +1,0 @@
-    public final static Pattern VARIABLES_MUST_BE_WITH_EQUALS_SIGN = Pattern.compile("^([\\s]*[\\w]*[\\s]*=[\\s]*([\\\"']?[\\w]*[.]?[+|-]?[\\w]*)[\\\"']?[\\s]*,)*$");

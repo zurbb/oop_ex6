@@ -1,1 +1,0 @@
-//    private final static Pattern STRUCTURE_PATTERN_FOR_COMPLETE_STATEMENT = Pattern.compile("/(\\s*)(int|double|boolean|char|String)(\\s*=\\s*)([\\x20-\\x2C\\x2E-\\x7E]+)");

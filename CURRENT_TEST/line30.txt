@@ -1,1 +1,0 @@
-    public final static Pattern BOOLEAN_VALUE = Pattern.compile("^(true|false|(\\+|-|)(\\d|.)+)$");

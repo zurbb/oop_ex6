@@ -1,1 +1,1 @@
-    public final static Pattern ASSIGNMENT_WITHOUT_TYPE = Pattern.compile("([\\s]*(final)*[\\s]*)([\\s]+[a-zA-Z]+)([\\s]*=[\\s]+[a-zA-Z]+[\\s]+)*([\\s]*;$)"); //          name      =    eerfweg        ;
+void t1(int x){
